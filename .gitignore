@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+.env
+
+# 수집 데이터는 스크립트로 재생성 가능하므로 커밋하지 않음
+data/raw/
+data/processed/
