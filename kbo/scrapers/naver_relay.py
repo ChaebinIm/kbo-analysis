@@ -85,9 +85,12 @@ class NaverRelayScraper:
             innings[inn] = relays
         return {"gameId": game_id, "game": info, "lineup": lineup, "innings": innings}
 
-    def game_to_file(self, game_id: str, out_dir: Path, overwrite: bool = False) -> Path | None:
-        """data/raw/naver/relay/{season}/{gameId}.json.gz 로 저장 (이미 있으면 건너뜀)."""
-        season = game_id[:4]
+    def game_to_file(self, game_id: str, season: int, out_dir: Path,
+                     overwrite: bool = False) -> Path | None:
+        """data/raw/naver/relay/{season}/{gameId}.json.gz 로 저장 (이미 있으면 건너뜀).
+
+        포스트시즌 경기ID는 앞자리가 연도가 아니므로(3333, 7777 …) season 을 따로 받는다.
+        """
         path = Path(out_dir) / "naver" / "relay" / season / f"{game_id}.json.gz"
         if path.exists() and not overwrite:
             return path

@@ -69,10 +69,12 @@ def _next_count(balls: int, strikes: int, result: str | None) -> tuple[int, int]
 def parse_game(data: dict) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     gid = data["gameId"]
     g = data.get("game", {})
+    # 포스트시즌 경기ID는 앞 4자리가 연도가 아니다 (3333=준PO, 4444=WC, 5555=PO, 6666=5위결정전, 7777=KS)
+    game_date = g.get("gameDate") or f"{gid[:4]}-{gid[4:6]}-{gid[6:8]}"
     meta = {
         "game_id": gid,
-        "game_date": g.get("gameDate") or f"{gid[:4]}-{gid[4:6]}-{gid[6:8]}",
-        "season": _i(gid[:4]),
+        "game_date": game_date,
+        "season": _i(game_date[:4]),
         "round_code": g.get("roundCode"),
         "stadium": g.get("stadium"),
         "home_team": g.get("homeTeamCode"),

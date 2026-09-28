@@ -40,7 +40,7 @@ def main():
         ok = skip = fail = 0
         for i, gid in enumerate(done["gameId"], 1):
             try:
-                path = scraper.game_to_file(gid, out_dir, args.overwrite)
+                path = scraper.game_to_file(gid, season, out_dir, args.overwrite)
                 if path is None:
                     skip += 1
                 else:
