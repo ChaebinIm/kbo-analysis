@@ -91,7 +91,7 @@ class NaverRelayScraper:
 
         포스트시즌 경기ID는 앞자리가 연도가 아니므로(3333, 7777 …) season 을 따로 받는다.
         """
-        path = Path(out_dir) / "naver" / "relay" / season / f"{game_id}.json.gz"
+        path = Path(out_dir) / "naver" / "relay" / str(season) / f"{game_id}.json.gz"
         if path.exists() and not overwrite:
             return path
         data = self.game(game_id)
